@@ -61,5 +61,6 @@ console.log(require.cache);
  * 
  */
 console.log('require.main 입니다.');
+// require.main: 노드 실행 시 첫 모듈을 가리킨다.
 console.log(require.main === module);       // true
 console.log(require.main.filename);         // /Users/garam/Documents/dev/nodejs/module/require.js
