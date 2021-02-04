@@ -1,0 +1,7 @@
+1. window 에서 프로세스 종료하기
+    $ netstat -ano | findstr 포트
+    $ taskkill /pid 프로세스아이디 /f
+
+3. mac/linux 에서 프로세스 종료하기
+    $ lsof -i tcp:포트
+    $ kill -9 프로세스아이디
