@@ -27,7 +27,7 @@ async function getUser(){   // 로딩 시 사용자 정보를 가져오는 함�
             remove.textContent = 'Delete';
             remove.addEventListener('click', async () => { // click delete button
                 try {
-                    await axios.delete('/user' + key);
+                    await axios.delete('/user/' + key);
                     getUser();
                 } catch (err) {
                     console.error(err);
