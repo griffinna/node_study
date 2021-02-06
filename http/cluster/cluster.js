@@ -19,6 +19,9 @@ if(cluster.isMaster) {
     cluster.on('exit', (worker, code, signal) => {
         console.log(`${worker.process.pid} 번 워커가 종료되었습니다.`);
         console.log('code', code, 'signal', signal);
+        // 오류가 발생하여도 워커를 다시 올림 
+        // 예기치 못한 에러로 인해 서버가 종료되는 현상을 방지 할 수 있어 클러스터링을 적용해두는 것이 좋음
+        cluster.fork();
     });
 }else{
     // 워커들이 포트에서 대기
@@ -26,6 +29,11 @@ if(cluster.isMaster) {
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
         res.write('<h1>Hello world!</h1>');
         res.end('<p>Hello Cluster!</p>');
+
+        // 워커가 존재하는지 확인하기 위해 1초마다 강제 종료
+        setTimeout(() => {
+            process.exit();
+        }, 1000);
     }).listen(8086);
 
     console.log(`${process.pid} 번 워커 실행..`)
